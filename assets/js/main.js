@@ -133,5 +133,5 @@ document.body.insertBefore(scoreOutput, playAgain)
 
 // add site title
 let title = document.createElement('h1')
-title.textContent = 'Play a quiz'
+title.textContent = 'Take a quiz'
 document.body.prepend(title)
