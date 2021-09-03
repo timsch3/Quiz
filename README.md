@@ -1,2 +1,2 @@
 # Quiz
-Made a quiz to exercise using JS to create and append DOM Elements and using EventListeners: https://timsch3.github.io/Quiz/
+Made a quiz to exercise using EventListeners and creating and appending DOM Elements: https://timsch3.github.io/Quiz/
