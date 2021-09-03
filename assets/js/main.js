@@ -63,11 +63,11 @@ let data = [
 
 let score = 0
 
-// create html
 data.forEach(e => {
     // add a container for each question
     let div = document.createElement('div')
     document.body.appendChild(div)
+    div.setAttribute('id', data.findIndex(o => o.question == e.question))
     // create elements from data
     let img = document.createElement('img')
     img.setAttribute('src', e.url)
@@ -80,31 +80,37 @@ data.forEach(e => {
         li.textContent = e
         li.classList.add('button')
         ul.appendChild(li)
-        ul.addEventListener('click', function clickEvent(event) {
-            this.removeEventListener('click', clickEvent, false)
-            // check for right answer and give color feedback
-            if (event.target.textContent == answer) {
-                event.target.style.backgroundColor = 'darkgreen'
-                score += 1
-            }
-            else { // mark right answer if answered wrong
-                event.target.style.backgroundColor = 'darkred'
-                for (e of ul.getElementsByTagName('li')) {
-                    if (e.textContent == answer) {
-                        e.style.textDecoration = 'underline'
-                    }
-                    e.classList.remove('button')
-                    e.classList.add('button-inactive')
-                }
-            } // style all other li elements inactive
+    }) // check for right answer and give color feedback
+    ul.addEventListener('click', function clickEvent(event) {
+        this.removeEventListener('click', clickEvent)
+        if (event.target.textContent == answer) {
+            score += 1
+            scoreOutput.textContent = `You gave the right answer to ${score} of ${data.length} questions.`
+            event.target.style.backgroundColor = 'darkgreen'
+            setTimeout(scrollToNextDiv, 500)
+        }
+        else { // mark right answer if answered wrong
+            event.target.style.backgroundColor = 'darkred'
+            setTimeout(scrollToNextDiv, 2000)
             for (e of ul.getElementsByTagName('li')) {
-                if (e.textContent != answer) {
-                    e.classList.remove('button')
-                    e.classList.add('button-inactive')
+                if (e.textContent == answer) {
+                    e.style.textDecoration = 'underline'
                 }
+                e.classList.remove('button')
+                e.classList.add('button-inactive')
             }
-            event.target.style.color = '#fff'
-        })
+        } // style all other li elements inactive
+        for (e of ul.getElementsByTagName('li')) {
+            if (e.textContent != answer) {
+                e.classList.remove('button')
+                e.classList.add('button-inactive')
+            }
+        }
+        event.target.style.color = '#fff'
+        let nextDiv = document.getElementById(Number(div.id) + 1)
+        function scrollToNextDiv() {
+            nextDiv.scrollIntoView({ behavior: 'smooth' })
+        }
     })
     // append elements to html
     div.append(img, question, ul)
@@ -119,6 +125,11 @@ playAgain.setAttribute('href', 'index.html')
 playAgain.textContent = 'Play again'
 playAgain.classList.add('button')
 document.body.appendChild(playAgain)
+
+// add score output
+let scoreOutput = document.createElement('p')
+scoreOutput.textContent = 'You gave the right answer to ' + score + ' of ' + data.length + ' questions.'
+document.body.insertBefore(scoreOutput, playAgain)
 
 // add site title
 let title = document.createElement('h1')
