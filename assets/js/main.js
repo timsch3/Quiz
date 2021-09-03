@@ -76,26 +76,24 @@ data.forEach(e => {
     e.choice.forEach(e => {
         let li = document.createElement('li')
         li.textContent = e
-        let eventHandler = function eventHandler() { checkAnswer(ul, li, e, answer) }
         ul.appendChild(li)
-        li.addEventListener('click', eventHandler)
+        ul.addEventListener('click', function clickEvent(event) {
+            this.removeEventListener('click', clickEvent, false)
+            // check for right answer and give color feedback
+            if (event.target.textContent == answer) {
+                event.target.style.backgroundColor = 'darkgreen'
+            }
+            else {
+                event.target.style.backgroundColor = 'darkred'
+                for (e of ul.getElementsByTagName('li')) {
+                    if (e.textContent == answer) {
+                        e.style.textDecoration = 'underline'
+                    }
+                }
+            }
+            event.target.style.color = '#fff'
+        })
     })
     // append elements to html
     div.append(img, question, ul)
 });
-
-function checkAnswer(ul, li, givenAnswer, correctAnswer) {
-    // remove event listeners from the li elements
-    allListItems = ul.getElementsByTagName('li')
-    console.log(allListItems)
-    for (i of allListItems) {
-        i.removeEventListener('click', i.eventHandler)
-    }
-    // check for right answer and give color feedback
-    if (givenAnswer == correctAnswer) {
-        li.style.backgroundColor = 'darkgreen'
-    } else {
-        li.style.backgroundColor = 'darkred'
-    }
-    li.style.color = '#fff'
-}
