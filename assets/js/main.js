@@ -1,13 +1,13 @@
 let data = [
     {
         url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/4a864049-816a-479e-8736-51740e8b724b.jpg",
-        question: "Which ocean lies on the east coast of the United States?",
+        question: "Which ocean lies on the east coast of the USA?",
         choice: ["Eastern", "Pacific", "Indian", "Atlantic"],
         answer: "Atlantic"
     },
     {
         url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/4d101ba1-9275-4fb5-ba2c-5606e6c0274e.jpg",
-        question: "Which is the world's highest mountain?",
+        question: "Which is the worlds highest mountain?",
         choice: ["K2", "Makalu", "Mount Everest", "Kilimanjaro"],
         answer: "Mount Everest"
     },
@@ -56,7 +56,7 @@ let data = [
     {
         url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/1226f177-dc1a-4142-8875-bdaa177717d7.jpg",
         question: "Which is the largest body of water?",
-        choice: ["indian Ocean", "Pacific Ocean", "Atlantic Ocean", "Nile River"],
+        choice: ["Indian Ocean", "Pacific Ocean", "Atlantic Ocean", "Nile River"],
         answer: "Pacific Ocean"
     }
 ]
@@ -97,3 +97,14 @@ data.forEach(e => {
     // append elements to html
     div.append(img, question, ul)
 });
+
+// add play again link
+let playAgain = document.createElement('a')
+playAgain.setAttribute('href', 'index.html')
+playAgain.textContent = 'Play again'
+document.body.appendChild(playAgain)
+
+// add site title
+let title = document.createElement('h1')
+title.textContent = 'Play a quiz'
+document.body.prepend(title)
