@@ -71,13 +71,31 @@ data.forEach(e => {
     img.setAttribute('src', e.url)
     let question = document.createElement('p')
     question.textContent = e.question
-    let choices = document.createElement('ul')
+    let ul = document.createElement('ul')
+    let answer = e.answer
     e.choice.forEach(e => {
         let li = document.createElement('li')
         li.textContent = e
-        choices.appendChild(li)
+        let eventHandler = function eventHandler() { checkAnswer(ul, li, e, answer) }
+        ul.appendChild(li)
+        li.addEventListener('click', eventHandler)
     })
     // append elements to html
-    div.append(img, question, choices)
+    div.append(img, question, ul)
 });
 
+function checkAnswer(ul, li, givenAnswer, correctAnswer) {
+    // remove event listeners from the li elements
+    allListItems = ul.getElementsByTagName('li')
+    console.log(allListItems)
+    for (i of allListItems) {
+        i.removeEventListener('click', i.eventHandler)
+    }
+    // check for right answer and give color feedback
+    if (givenAnswer == correctAnswer) {
+        li.style.backgroundColor = 'darkgreen'
+    } else {
+        li.style.backgroundColor = 'darkred'
+    }
+    li.style.color = '#fff'
+}
