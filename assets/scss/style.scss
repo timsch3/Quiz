@@ -25,7 +25,7 @@ body {
             }
         }
     }
-    li, a {
+    .button {
         padding: 10px 20px;
         color: #fff;
         background-color: #333;
@@ -34,9 +34,17 @@ body {
         cursor: pointer;
         transition: 0.2s;
     }
-    li:hover, a:hover {
+    .button:hover {
         color: #333;
         background-color: #fff;
+    }
+    .button-inactive {
+        padding: 10px 20px;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        transition: 0.2s;
     }
     a {
         text-decoration: none;

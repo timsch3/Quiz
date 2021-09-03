@@ -61,6 +61,8 @@ let data = [
     }
 ]
 
+let score = 0
+
 // create html
 data.forEach(e => {
     // add a container for each question
@@ -76,19 +78,29 @@ data.forEach(e => {
     e.choice.forEach(e => {
         let li = document.createElement('li')
         li.textContent = e
+        li.classList.add('button')
         ul.appendChild(li)
         ul.addEventListener('click', function clickEvent(event) {
             this.removeEventListener('click', clickEvent, false)
             // check for right answer and give color feedback
             if (event.target.textContent == answer) {
                 event.target.style.backgroundColor = 'darkgreen'
+                score += 1
             }
-            else {
+            else { // mark right answer if answered wrong
                 event.target.style.backgroundColor = 'darkred'
                 for (e of ul.getElementsByTagName('li')) {
                     if (e.textContent == answer) {
                         e.style.textDecoration = 'underline'
                     }
+                    e.classList.remove('button')
+                    e.classList.add('button-inactive')
+                }
+            } // style all other li elements inactive
+            for (e of ul.getElementsByTagName('li')) {
+                if (e.textContent != answer) {
+                    e.classList.remove('button')
+                    e.classList.add('button-inactive')
                 }
             }
             event.target.style.color = '#fff'
@@ -98,10 +110,14 @@ data.forEach(e => {
     div.append(img, question, ul)
 });
 
+// add classes to elements
+document.getElementsByTagName('')
+
 // add play again link
 let playAgain = document.createElement('a')
 playAgain.setAttribute('href', 'index.html')
 playAgain.textContent = 'Play again'
+playAgain.classList.add('button')
 document.body.appendChild(playAgain)
 
 // add site title
