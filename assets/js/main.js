@@ -87,6 +87,7 @@ data.forEach(e => {
             score += 1
             scoreOutput.textContent = `You gave the right answer to ${score} of ${data.length} questions.`
             event.target.style.backgroundColor = 'darkgreen'
+            event.target.style.cursor = 'default'
             setTimeout(scrollToNextDiv, 500)
         }
         else { // mark right answer if answered wrong
