@@ -125,6 +125,7 @@ let playAgain = document.createElement('a')
 playAgain.setAttribute('href', 'index.html')
 playAgain.textContent = 'Play again'
 playAgain.classList.add('button')
+playAgain.style.fontSize = '1.6rem'
 document.body.appendChild(playAgain)
 
 // add score output
